@@ -10,11 +10,16 @@ if(isset($_GET["new"])){
 	exit;
 }
 
-if(empty($_SESSION["token"])){
-	http_response_code(204);
+if(isset($_SESSION["reject"])){
+	http_response_code(403);
 	exit;
 }
 
-echo $_SESSION["token"];
+if(isset($_SESSION["token"])){
+	echo $_SESSION["token"];
+	exit;
+}
+
+http_response_code(204);
 
 ?>
