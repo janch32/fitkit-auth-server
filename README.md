@@ -18,7 +18,7 @@ Api se skládá ze dvou částí - skriptu pro aplikaci a skriptu pro generován
 5. Uživatel se po přihlášení dostane na stránku, která ygeneruje token a informuje uživatele, že již je možné stránku zavřít.
 6. Externí aplikace dostane při dotazování `request-token.php?request=$requestID` v odpovědi vygenerovaný token. Tím se celý proces ukončí a v aplikaci je nyní validní JWT token obsahující login uživatele a ověřovací podpis.
 
-### request-token.php
+### Rozhraní pro externí aplikaci (`request-token.php`)
 Skript, který umožnuje externí aplikaci (vscode rozšíření) vytvořit nový požadavek na token a po autentizaci tento token získat.
 
 Tento skript nemá žádné závislosti a měl by být veřejně dostupný (bez nutnosti přihlášení). Jediný požadavek je nutnost běže na stejné instanci webserveru jako `request-token.php`, aby tyto dva skripty měli společné PHP Session.
@@ -45,7 +45,7 @@ Dotaz, zda již byl uživatel autentizován. V tomto případě autentizace prob
 * Návratový stav: `200 OK`
 * Odpověď: `eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJqYW5jaDMyIiwic3ViIjoieGxvZ2luMDAiLCJleHAiOjE1MTYyMzkwMjJ9.EwmyYGM89ONMTxMZ1ilLdojGiLNSjJu125a9qb2hLRo`
 
-### generate-token.php
+### Generování tokenu (`generate-token.php`)
 Skript pro generování autentizačního JWT tokenu. Token po vygenerování je dostupný v superglobální proměnné `$_SESSION["token"]`, kde jako session id je použita hodnota parametru `request`. Na výstupu je poté vygenerována HTML stránka informující uživatele o úspěšnosti této akce.
 
 Tento skript neprovádí sám o sobě autentizaci uživatele, ale je závislý na existující autentizaci webserveru nebo framewroku. Proto je vhodné tento skript umístit tam, kde jej může načíst pouze přihlášený uživatel. Ve stejné složce musí být umístěn konfigurační skript `config.php` a složka `php-jwt` s PHP JWT knihovnou.
