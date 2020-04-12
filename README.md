@@ -11,8 +11,8 @@ Před nasazením je nutné vytvořit konfigurační soubor `config.php`. Nejjedn
 
 Api se skládá ze dvou částí - skriptu pro aplikaci a skriptu pro generování tokenu. Tyto části mezi sebou komunikují přes `session` funkcionalitu v PHP.
 
-1. Externí aplikace zavolá skript `request-token.php?new` čím vytvoří nový požadavek a jako odpověď dostane ID tohoto požadavku (dále jako `$requestID`).
-2. Aplikace požádá operační systém, aby otevřel stránku `generate-token.php?request=$tokenID` ve výchozím prohlížeči.
+1. Externí aplikace zavolá skript `request-token.php?new` čím vytvoří nový požadavek a jako odpověď dostane ID nového požadavku (dále jako `$requestID`).
+2. Aplikace požádá operační systém, aby otevřel stránku `generate-token.php?request=$requestID` ve výchozím prohlížeči.
 3. Tato stránka je dostupná pouze po přihlášení. Uživatel bude tedy vyzván k přihlášení, pokud již není na cílovém webu přihlášen.
 4. Mezitím se na pozadí externí aplikace pravidelně dotazuje na vygenerovaný token `request-token.php?request=$requestID`.
 5. Uživatel se po přihlášení dostane na stránku, která ygeneruje token a informuje uživatele, že již je možné stránku zavřít.
