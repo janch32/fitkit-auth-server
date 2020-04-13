@@ -21,15 +21,18 @@ if(isset($_SESSION["token"])){
 }elseif(isset($_GET["reject"]) || isset($_SESSION["reject"])){
 	// Požadavek zamítnut (již byl nebo teď je)
 	$_SESSION["reject"] = true;
-	unset($_SESSION["token"]);
 
-}elseif(isset($_GET["nonce"]) && $_GET["nonce"] === $_SESSION["nonce"]){
-	// Verifikační řetězec souhlasí, generujeme token
-	$_SESSION["token"] = JWT::encode([
-		"iss" => $issuer,
-		"sub" => $user,
-		"exp" => time() + $validity
-	], $private_key, $sign_algo);
+}elseif(isset($_GET["nonce"])){
+	if($_GET["nonce"] === $_SESSION["nonce"]){
+		// Verifikační řetězec souhlasí, generujeme token
+		$_SESSION["token"] = JWT::encode([
+			"iss" => $issuer,
+			"sub" => $user,
+			"exp" => time() + $validity
+		], $private_key, $sign_algo);
+	}else{
+		$_SESSION["reject"] = true;
+	}
 }
 
 unset($_SESSION["nonce"]);
