@@ -57,22 +57,26 @@ if(!isset($_SESSION["reject"]) && !isset($_SESSION["token"])){
 <html>
 	<head>
 		<meta charset="utf-8">
-		<meta type="viewport" content="initial-scale=1.0">
+		<meta name="viewport" content="initial-scale=1.0">
 		<title>Autentizace aplikace</title>
 		<style>
 			*{ margin:0; padding:0; box-sizing:border-box; }
 			*:focus{ outline:none; }
 
+			html{ display:flex; min-height:100%; }
+
 			body{
 				font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
 				font-size: 17px;
 				background: #ecf0f1;
-				min-height: 100vh;
+				width: 100%;
+				min-height: 100%;
 				display: flex;
 				flex-flow: column;
 				align-items: center;
 				justify-content: center;
 				padding: 32px;
+				text-align: center;
 			}
 
 			.icon{ margin-bottom:32px; }
@@ -97,8 +101,12 @@ if(!isset($_SESSION["reject"]) && !isset($_SESSION["token"])){
 			.button:focus,.button:active{ background:#3498db; text-decoration:none; }
 			.button:active{ transform: scale(0.95); }
 
-			p{ margin-bottom:8px; max-width:600px; text-align:center; }
+			p{ margin-bottom:8px; max-width:600px; }
 			p.info{ opacity:.8; font-size:.8em; margin-top:32px; }
+
+			@media(max-width: 700px){
+				body{ font-size:15px; }
+			}
 
 			/** Pro uživatele s tmavým režimem prohlížeče, aby neměli vypálené oči */
 			@media(prefers-color-scheme: dark){
