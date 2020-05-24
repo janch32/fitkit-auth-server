@@ -2,7 +2,7 @@
 
 require_once "config.php";
 
-spl_autoload_register(function ($className) {
+spl_autoload_register(function($className){
 	$className = str_replace("Firebase\\JWT", "php-jwt", $className);
 	$path = explode("\\", $className);
 	array_unshift($path, __DIR__);
